@@ -225,3 +225,8 @@
   background: url("https://ts1.mm.bing.net/th?id=OIP.jpfFwf1lrKWk0QsWvOXNLgHaHa&pid=15.1&o=7&rm=3") center/cover no-repeat;
   filter: brightness(0.7);
 }
+
+/* Ensure the right panel is wide enough for a two-column card layout */
+.personal-box {
+  max-width: 1100px;
+}
