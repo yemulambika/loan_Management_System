@@ -1,9 +1,8 @@
 import axios from "axios";
 
 const API = axios.create({
-  baseURL: `${process.env.NEXT_PUBLIC_API_URL}`
+  baseURL: `${process.env.NEXT_PUBLIC_API_URL}/api`
 });
-API.post("/api/auth/register")
 
 API.interceptors.request.use((config) => {
   const token = localStorage.getItem("token");
