@@ -37,7 +37,7 @@ function SalesDashboardContent() {
   const fetchData = async () => {
     try {
       setError("");
-      const leadsRes = await API.get<Lead[]>("/users/leads");
+      const leadsRes = await API.get<Lead[]>("/auth/users/leads");
       const followRes = await API.get<FollowUpLoan[]>("/loan/followups");
       setLeads(leadsRes.data);
       setFollowUps(followRes.data);
