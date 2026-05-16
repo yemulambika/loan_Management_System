@@ -96,26 +96,28 @@ function PersonalDetailsContent() {
           <div className="personal-content">
             <h1 className="personal-title">Loan Applications</h1>
 
-            {loans.map((ln) => (
-              <div key={ln._id} className="loan-status-card">
-                <p>
-                  <span>Status</span>
-                  <strong>{ln.status}</strong>
-                </p>
-                <p>
-                  <span>Loan Amount</span>
-                  <strong>{formatCurrency(ln.amount)}</strong>
-                </p>
-                <p>
-                  <span>Total Repayment</span>
-                  <strong>{formatCurrency(ln.totalRepayment)}</strong>
-                </p>
-                <p>
-                  <span>Paid Amount</span>
-                  <strong>{formatCurrency(ln.paidAmount)}</strong>
-                </p>
-              </div>
-            ))}
+            <div className="loan-status-grid">
+              {loans.map((ln) => (
+                <div key={ln._id} className="loan-status-card">
+                  <p>
+                    <span>Status</span>
+                    <strong>{ln.status}</strong>
+                  </p>
+                  <p>
+                    <span>Loan Amount</span>
+                    <strong>{formatCurrency(ln.amount)}</strong>
+                  </p>
+                  <p>
+                    <span>Total Repayment</span>
+                    <strong>{formatCurrency(ln.totalRepayment)}</strong>
+                  </p>
+                  <p>
+                    <span>Paid Amount</span>
+                    <strong>{formatCurrency(ln.paidAmount)}</strong>
+                  </p>
+                </div>
+              ))}
+            </div>
 
             {/* If latest loan has no amount, allow continuing application */}
             {loans[0] && !loans[0].amount && (
