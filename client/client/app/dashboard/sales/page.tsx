@@ -129,20 +129,18 @@ function SalesDashboardContent() {
                       {loan.documents && loan.documents.length > 0
                         ? loan.documents.map((doc) => (
                             <div key={doc}>
-                              <a href={`${serverBase}/${doc}`} target="_blank" rel="noreferrer">
-                                View
-                              </a>
+                              {doc.startsWith("http") ? (
+                                <a href={doc} target="_blank" rel="noreferrer">View</a>
+                              ) : (
+                                <a href={`${serverBase}${doc}`} target="_blank" rel="noreferrer">View</a>
+                              )}
                             </div>
-                          ))
-                        : loan.salarySlip
-                          ? (
-                              <a
-                                href={`${serverBase}/${loan.salarySlip}`}
-                                target="_blank"
-                                rel="noreferrer"
-                              >
-                                View
-                              </a>
+                              ) : loan.salarySlip ? (
+                              loan.salarySlip.startsWith("http") ? (
+                                <a href={loan.salarySlip} target="_blank" rel="noreferrer">View</a>
+                              ) : (
+                                <a href={`${serverBase}${loan.salarySlip}`} target="_blank" rel="noreferrer">View</a>
+                              )
                             )
                           : "-"}
                     </td>

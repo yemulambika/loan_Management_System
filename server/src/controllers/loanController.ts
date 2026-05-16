@@ -1,9 +1,12 @@
 import type { Response } from "express";
+import path from "path";
+import fs from "fs";
 import Loan from "../models/Loan.js";
 import User from "../models/User.js";
 import type { AuthRequest } from "../middleware/authMiddleware.js";
 import { runBRE } from "../utils/bre.js";
 import { calculateLoan } from "../utils/calculateLoan.js";
+import cloudinary from "../config/cloudinary.js";
 
 export const personalDetails = async (
   req: AuthRequest,
@@ -160,8 +163,35 @@ export const uploadDocuments = async (req: AuthRequest, res: Response) => {
     // multer puts files here
     const files = req.files as Express.Multer.File[];
 
-    // Store only filenames (they'll be served via /uploads route)
-    const filePaths = files.map((file) => `/uploads/${file.filename}`);
+    const filePaths: string[] = [];
+
+    // If Cloudinary is configured, upload files there and store secure URLs.
+    const useCloudinary = !!(
+      process.env.CLOUDINARY_CLOUD_NAME &&
+      process.env.CLOUDINARY_API_KEY &&
+      process.env.CLOUDINARY_API_SECRET
+    );
+
+    for (const file of files) {
+      if (useCloudinary) {
+        // Upload local file to Cloudinary
+        const uploaded = await cloudinary.uploader.upload(file.path, {
+          folder: "loan_documents",
+        });
+        // push cloud url
+        filePaths.push(uploaded.secure_url);
+
+        // remove local file after upload
+        try {
+          fs.unlinkSync(file.path);
+        } catch (err) {
+          // ignore
+        }
+      } else {
+        // Store only filenames (they'll be served via /uploads route)
+        filePaths.push(`/uploads/${file.filename}`);
+      }
+    }
     const { loanId } = req.body;
 
     const loanQuery = loanId
@@ -198,6 +228,14 @@ export const getLeads = async (req: AuthRequest, res: Response) => {
   });
 
   res.json(users);
+};
+export const getMyLoans = async (req: AuthRequest, res: Response) => {
+  try {
+    const loans = await Loan.find({ borrower: req.user.id }).sort({ createdAt: -1 });
+    res.json(loans);
+  } catch (error) {
+    res.status(500).json({ message: "Failed to fetch loans", error });
+  }
 };
 export const getFollowUps = async (req: AuthRequest, res: Response) => {
   try {

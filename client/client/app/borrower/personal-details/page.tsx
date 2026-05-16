@@ -22,7 +22,7 @@ type ApiErrorResponse = {
 
 function PersonalDetailsContent() {
   const router = useRouter();
-  const [loan, setLoan] = useState<Loan | null>(null);
+  const [loans, setLoans] = useState<Loan[]>([]);
   const [loading, setLoading] = useState(true);
   const [showForm, setShowForm] = useState(false);
 
@@ -37,10 +37,10 @@ function PersonalDetailsContent() {
   useEffect(() => {
     const fetchExistingLoan = async () => {
       try {
-        const res = await API.get<Loan | null>("/loan/my-loan");
-        setLoan(res.data);
+        const res = await API.get<Loan[]>("/loan/my-loans");
+        setLoans(res.data || []);
       } catch {
-        setLoan(null);
+        setLoans([]);
       } finally {
         setLoading(false);
       }
@@ -89,37 +89,36 @@ function PersonalDetailsContent() {
     );
   }
 
-  if (loan && !showForm) {
+  if (loans.length > 0 && !showForm) {
     return (
       <div className="personal-container">
         <div className="personal-box">
           <div className="personal-content">
-            <h1 className="personal-title">Loan Application Status</h1>
+            <h1 className="personal-title">Loan Applications</h1>
 
-            <div className="loan-status-card">
-              <p>
-                <span>Status</span>
-                <strong>{loan.status}</strong>
-              </p>
-              <p>
-                <span>Borrower</span>
-                <strong>{loan.fullName || "Not available"}</strong>
-              </p>
-              <p>
-                <span>Loan Amount</span>
-                <strong>{formatCurrency(loan.amount)}</strong>
-              </p>
-              <p>
-                <span>Total Repayment</span>
-                <strong>{formatCurrency(loan.totalRepayment)}</strong>
-              </p>
-              <p>
-                <span>Paid Amount</span>
-                <strong>{formatCurrency(loan.paidAmount)}</strong>
-              </p>
-            </div>
+            {loans.map((ln) => (
+              <div key={ln._id} className="loan-status-card">
+                <p>
+                  <span>Status</span>
+                  <strong>{ln.status}</strong>
+                </p>
+                <p>
+                  <span>Loan Amount</span>
+                  <strong>{formatCurrency(ln.amount)}</strong>
+                </p>
+                <p>
+                  <span>Total Repayment</span>
+                  <strong>{formatCurrency(ln.totalRepayment)}</strong>
+                </p>
+                <p>
+                  <span>Paid Amount</span>
+                  <strong>{formatCurrency(ln.paidAmount)}</strong>
+                </p>
+              </div>
+            ))}
 
-            {!loan.amount && (
+            {/* If latest loan has no amount, allow continuing application */}
+            {loans[0] && !loans[0].amount && (
               <button
                 type="button"
                 className="personal-btn"

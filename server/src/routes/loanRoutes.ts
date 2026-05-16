@@ -10,6 +10,7 @@ import {
   getFollowUps,
   getDisbursedLoans,
   getMyLoan,
+  getMyLoans,
   getPendingLoans,
   getSanctionedLoans,
   personalDetails,
@@ -74,6 +75,12 @@ router.get(
   "/my-loan",
   authMiddleware,
   getMyLoan
+);
+
+router.get(
+  "/my-loans",
+  authMiddleware,
+  getMyLoans
 );
 
 router.put("/:id/status", authMiddleware, roleMiddleware(["sanction","disbursement","collection","admin"]), updateLoanStatus);
