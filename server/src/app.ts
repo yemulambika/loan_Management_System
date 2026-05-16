@@ -1,5 +1,8 @@
 import express from "express";
 import cors from "cors";
+import path from "path";
+import { fileURLToPath } from "url";
+import fs from "fs";
 
 import authRoutes from "./routes/authRoutes.js";
 import loanRoutes from "./routes/loanRoutes.js";
@@ -7,6 +10,18 @@ import paymentRoutes from "./routes/paymentRoutes.js";
 import dashboardRoutes from "./routes/dashboardRoutes.js";
 
 import errorMiddleware from "./middleware/errorMiddleware.js";
+
+// Get the directory name in ES modules
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
+
+// Define uploads directory as absolute path
+const uploadsDir = path.join(__dirname, "../uploads");
+
+// Create uploads directory if it doesn't exist
+if (!fs.existsSync(uploadsDir)) {
+  fs.mkdirSync(uploadsDir, { recursive: true });
+}
 
 const app = express();
 
@@ -50,7 +65,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
 
-app.use("/uploads", express.static("uploads"));
+app.use("/uploads", express.static(uploadsDir));
 
 
 app.get("/", (req, res) => {

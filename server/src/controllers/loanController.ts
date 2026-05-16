@@ -160,7 +160,8 @@ export const uploadDocuments = async (req: AuthRequest, res: Response) => {
     // multer puts files here
     const files = req.files as Express.Multer.File[];
 
-    const filePaths = files.map((file) => file.path);
+    // Store only filenames (they'll be served via /uploads route)
+    const filePaths = files.map((file) => `/uploads/${file.filename}`);
     const { loanId } = req.body;
 
     const loanQuery = loanId
