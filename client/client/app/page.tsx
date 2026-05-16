@@ -50,7 +50,7 @@ export default function LandingPage() {
             <Button
               type="primary"
               size="large"
-              onClick={() => router.push("/register")}
+              onClick={() => router.push("/borrower/register")}
               className="cta-button-dark"
             >
               Get Started
@@ -114,7 +114,7 @@ export default function LandingPage() {
             <Button
               type="primary"
               size="large"
-              onClick={() => router.push("/register")}
+              onClick={() => router.push("/borrower/register")}
               className="cta-button-dark"
             >
               Create Account

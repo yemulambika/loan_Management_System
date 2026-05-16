@@ -81,7 +81,7 @@ export default function Login() {
           </Form.Item>
        
           <Form.Item>
-            <Button type="default" block onClick={() => router.push("/register")}>
+            <Button type="default" block onClick={() => router.push("/borrower/register")}>
               Register
             </Button>
           </Form.Item>
