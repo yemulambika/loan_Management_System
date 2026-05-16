@@ -1,0 +1,219 @@
+.personal-container {
+  padding: 2rem;
+  background: #f5f6fa;
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+}
+
+.personal-box {
+  background: #fff;
+  border-radius: 12px;
+  padding: 2rem;
+  max-width: 600px;
+  width: 100%;
+  box-shadow: 0 6px 18px rgba(0,0,0,0.1);
+  animation: fadeInUp 0.6s ease;
+}
+
+.personal-title {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 1.5rem;
+  text-align: center;
+  color: #1890ff;
+  animation: fadeInDown 0.6s ease;
+}
+
+.personal-form {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.personal-input {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #d9d9d9;
+  border-radius: 8px;
+  font-size: 1rem;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease, transform 0.2s ease;
+}
+
+.personal-input:focus {
+  border-color: #1890ff;
+  box-shadow: 0 0 6px rgba(24,144,255,0.3);
+  transform: scale(1.02);
+}
+
+.personal-btn {
+  background: #1890ff;
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  padding: 12px;
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.personal-btn:hover {
+  background: #096dd9;
+  transform: scale(1.05);
+}
+
+/* Animations */
+@keyframes fadeInDown {
+  from { opacity: 0; transform: translateY(-20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeInUp {
+  from { opacity: 0; transform: translateY(20px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+.personal-container {
+  display: flex;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+/* Left side image */
+.personal-container::before {
+  content: "";
+  flex: 1;
+  background: url("https://images.unsplash.com/photo-1607746882042-944635dfe10e")
+    center/cover no-repeat;
+  filter: brightness(0.7);
+}
+
+/* Right side form box */
+.personal-box {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #fff;
+  padding: 40px;
+  animation: fadeInUp 0.8s ease;
+}
+
+.personal-title {
+  text-align: center;
+  font-size: 28px;
+  font-weight: bold;
+  margin-bottom: 24px;
+  background: linear-gradient(90deg, #667eea, #764ba2);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.personal-form {
+  width: 100%;
+  max-width: 400px;
+}
+
+.personal-content {
+  width: 100%;
+  max-width: 430px;
+}
+
+.personal-message {
+  color: #555;
+  font-size: 1rem;
+  text-align: center;
+}
+
+.loan-status-card {
+  border: 1px solid #eee;
+  border-radius: 8px;
+  margin-bottom: 24px;
+  overflow: hidden;
+}
+
+.loan-status-card p {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  margin: 0;
+  padding: 14px 16px;
+  border-bottom: 1px solid #eee;
+  color: #444;
+}
+
+.loan-status-card p:last-child {
+  border-bottom: 0;
+}
+
+.loan-status-card span {
+  color: #666;
+}
+
+.loan-status-card strong {
+  color: #222;
+  text-align: right;
+}
+
+.personal-input {
+  width: 100%;
+  padding: 12px;
+  margin-bottom: 16px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.personal-input:focus {
+  border-color: #667eea;
+  box-shadow: 0 0 10px rgba(102, 126, 234, 0.6);
+  outline: none;
+}
+
+.personal-btn {
+  width: 100%;
+  padding: 12px;
+  background: linear-gradient(90deg, #667eea, #764ba2);
+  color: #fff;
+  border: none;
+  border-radius: 8px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.personal-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 20px rgba(118, 75, 162, 0.6);
+}
+
+.personal-btn-secondary {
+  margin-top: 12px;
+  background: #fff;
+  border: 1px solid #764ba2;
+  color: #764ba2;
+}
+
+.personal-btn-secondary:hover {
+  background: #f8f4ff;
+}
+
+/* Animation */
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+.personal-container::before {
+  content: "";
+  flex: 1;
+  background: url("https://ts1.mm.bing.net/th?id=OIP.jpfFwf1lrKWk0QsWvOXNLgHaHa&pid=15.1&o=7&rm=3") center/cover no-repeat;
+  filter: brightness(0.7);
+}

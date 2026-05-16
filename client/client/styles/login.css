@@ -1,0 +1,130 @@
+.login-container {
+  min-height: 100vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  animation: gradientShift 10s ease infinite;
+}
+
+@keyframes gradientShift {
+  0% {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  }
+  50% {
+    background: linear-gradient(135deg, #764ba2 0%, #667eea 100%);
+  }
+  100% {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  }
+}
+
+.login-box {
+  width: 400px;
+  padding: 40px;
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25);
+  animation: fadeInUp 0.8s ease;
+}
+
+@keyframes fadeInUp {
+  from {
+    opacity: 0;
+    transform: translateY(40px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.login-title {
+  text-align: center;
+  font-size: 28px;
+  font-weight: bold;
+  margin-bottom: 24px;
+  background: linear-gradient(90deg, #667eea, #764ba2);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.ant-form-item-label > label {
+  font-weight: 600;
+  color: #444;
+}
+
+.ant-input,
+.ant-input-password {
+  border-radius: 8px;
+  transition: box-shadow 0.3s ease, border-color 0.3s ease;
+}
+
+.ant-input:focus,
+.ant-input-password:focus {
+  border-color: #667eea;
+  box-shadow: 0 0 10px rgba(102, 126, 234, 0.6);
+}
+
+.ant-btn-primary {
+  background: linear-gradient(90deg, #667eea, #764ba2);
+  border: none;
+  border-radius: 8px;
+  font-weight: bold;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.ant-btn-primary:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 20px rgba(118, 75, 162, 0.6);
+}
+
+.ant-btn-default {
+  border-radius: 8px;
+  transition: background 0.3s ease, color 0.3s ease;
+}
+
+.ant-btn-default:hover {
+  background: #f0f0ff;
+  color: #667eea;
+}
+.btn-approve {
+  background-color: #38a169; /* green */
+  color: #fff;
+  padding: 4px 10px;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  margin-right: 6px;
+}
+
+.btn-approve:hover {
+  background-color: #2f855a;
+}
+
+.btn-reject {
+  background-color: #e53e3e; /* red */
+  color: #fff;
+  padding: 4px 10px;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+  margin-right: 6px;
+}
+
+.btn-reject:hover {
+  background-color: #c53030;
+}
+
+.btn-delete {
+  background-color: #718096; /* gray */
+  color: #fff;
+  padding: 4px 10px;
+  border-radius: 6px;
+  border: none;
+  cursor: pointer;
+}
+
+.btn-delete:hover {
+  background-color: #4a5568;
+}

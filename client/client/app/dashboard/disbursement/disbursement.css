@@ -1,0 +1,27 @@
+.disbursement-card {
+  background: linear-gradient(135deg, #e6f7ff, #ffffff);
+  border: 1px solid #91d5ff;
+  border-radius: 10px;
+  padding: 24px;
+  margin-bottom: 20px;
+  transition: transform 0.25s ease, box-shadow 0.25s ease;
+}
+
+.disbursement-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 8px 20px rgba(24,144,255,0.25);
+}
+
+.disburse-btn {
+  background: #1890ff;
+  color: #fff;
+  border-radius: 6px;
+  padding: 12px 20px;
+  font-weight: 600;
+  transition: background 0.3s ease, transform 0.2s ease;
+}
+
+.disburse-btn:hover {
+  background: #096dd9;
+  transform: scale(1.08);
+}

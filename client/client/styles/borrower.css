@@ -1,0 +1,210 @@
+/* borrower.css */
+
+body {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  min-height: 100vh;
+  margin: 0;
+  font-family: "Poppins", sans-serif;
+  overflow-x: hidden;
+}
+
+/* Main Container */
+.borrower-container {
+  max-width: 700px;
+  margin: 40px auto;
+  animation: fadeIn 1s ease;
+}
+
+/* Ant Design Card Styling */
+.borrower-container .ant-card {
+  border-radius: 20px;
+  border: none;
+  backdrop-filter: blur(12px);
+  background: rgba(255, 255, 255, 0.12);
+  box-shadow:
+    0 8px 32px rgba(0, 0, 0, 0.2),
+    0 0 20px rgba(255, 255, 255, 0.1);
+  color: white;
+  transition: all 0.4s ease;
+  overflow: hidden;
+  position: relative;
+}
+
+/* Glow Hover Effect */
+.borrower-container .ant-card:hover {
+  transform: translateY(-6px) scale(1.01);
+  box-shadow:
+    0 12px 35px rgba(102, 126, 234, 0.5),
+    0 0 25px rgba(118, 75, 162, 0.7);
+}
+
+/* Animated Glow Border */
+.borrower-container .ant-card::before {
+  content: "";
+  position: absolute;
+  inset: -2px;
+  border-radius: 22px;
+  padding: 2px;
+  background: linear-gradient(
+    45deg,
+    #6a11cb,
+    #2575fc,
+    #ff6ec4,
+    #7873f5
+  );
+  background-size: 300% 300%;
+  animation: borderGlow 6s ease infinite;
+  z-index: -1;
+}
+
+/* Title */
+.borrower-container h1,
+.borrower-container h2,
+.borrower-container h3,
+.borrower-container .ant-typography {
+  color: #ffffff !important;
+  font-weight: 700;
+  text-align: center;
+}
+
+/* Upload Button */
+.borrower-container .ant-upload .ant-btn {
+  background: linear-gradient(90deg, #4facfe, #00f2fe);
+  border: none;
+  color: white;
+  font-weight: 600;
+  border-radius: 12px;
+  height: 45px;
+  transition: all 0.3s ease;
+  box-shadow: 0 0 15px rgba(79, 172, 254, 0.5);
+}
+
+.borrower-container .ant-upload .ant-btn:hover {
+  transform: scale(1.05);
+  box-shadow: 0 0 25px rgba(79, 172, 254, 0.9);
+}
+
+/* Sliders */
+.borrower-container .ant-slider-track {
+  background: linear-gradient(to right, #00f2fe, #4facfe);
+  height: 8px;
+}
+
+.borrower-container .ant-slider-rail {
+  background: rgba(255, 255, 255, 0.2);
+  height: 8px;
+}
+
+.borrower-container .ant-slider-handle::after {
+  background: #ffffff !important;
+  box-shadow: 0 0 15px #00f2fe;
+}
+
+/* Info Box */
+.loan-summary {
+  margin-top: 16px;
+  background: rgba(255, 255, 255, 0.08);
+  padding: 18px;
+  border-radius: 16px;
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  color: white;
+  animation: pulseGlow 3s infinite;
+}
+
+.loan-summary p {
+  font-size: 16px;
+  margin: 10px 0;
+  font-weight: 500;
+}
+
+/* Apply Button */
+.apply-btn {
+  margin-top: 20px !important;
+  height: 50px !important;
+  border-radius: 14px !important;
+  border: none !important;
+  background: linear-gradient(90deg, #302c96, #f938c2) !important;
+  font-size: 16px !important;
+  font-weight: bold !important;
+  transition: all 0.4s ease !important;
+  box-shadow: 0 0 20px rgba(67, 233, 123, 0.6);
+}
+
+.apply-btn:hover {
+  transform: translateY(-3px) scale(1.03);
+  box-shadow: 0 0 30px rgb(74, 53, 147);
+}
+
+/* Status Button */
+.status-btn {
+  margin-top: 20px;
+  width: 100%;
+  background: linear-gradient(90deg, #4242af, #5a388b);
+  color: white;
+  border: none;
+  padding: 14px;
+  border-radius: 14px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.4s ease;
+  box-shadow: 0 0 20px rgba(113, 74, 174, 0.5);
+}
+
+.status-btn:hover {
+  transform: scale(1.04);
+  box-shadow: 0 0 28px rgb(40, 29, 130);
+}
+
+/* Floating Animation */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(25px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Border Animation */
+@keyframes borderGlow {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+/* Pulsing Glow */
+@keyframes pulseGlow {
+  0% {
+    box-shadow: 0 0 10px rgba(255,255,255,0.1);
+  }
+  50% {
+    box-shadow: 0 0 25px rgba(255,255,255,0.3);
+  }
+  100% {
+    box-shadow: 0 0 10px rgba(255,255,255,0.1);
+  }
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+  .borrower-container {
+    margin: 20px;
+  }
+
+  .borrower-container .ant-card {
+    border-radius: 16px;
+  }
+
+  .loan-summary p {
+    font-size: 14px;
+  }
+}

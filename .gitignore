@@ -1,0 +1,31 @@
+# dependencies
+node_modules/
+
+# env and secrets
+.env
+.env.*
+!.env.example
+
+# build outputs
+.next/
+out/
+build/
+dist/
+coverage/
+*.tsbuildinfo
+
+# uploaded/generated files
+uploads/
+server/uploads/
+
+# logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+.pnpm-debug.log*
+
+# OS/editor
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
