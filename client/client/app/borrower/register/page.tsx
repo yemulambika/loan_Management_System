@@ -6,7 +6,7 @@ import { Form, Input, Button, Select, message } from "antd";
 import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { useAuth } from "@/hooks/useAuth";
-import { UserPlus, Mail, Lock, User, ArrowRight } from "lucide-react";
+import { UserPlus, Mail, Lock, User } from "lucide-react";
 
 type ApiErrorResponse = {
   message?: string;

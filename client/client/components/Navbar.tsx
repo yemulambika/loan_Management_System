@@ -1,12 +1,10 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { LogOut, Menu } from "lucide-react";
-import { useState } from "react";
+import { LogOut } from "lucide-react";
 
 export default function Navbar() {
   const router = useRouter();
-  const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
 
   const logout = () => {
     localStorage.removeItem("token");

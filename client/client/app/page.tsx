@@ -5,7 +5,6 @@ import { useRouter } from "next/navigation";
 import {
   ShieldCheck,
   Zap,
-  ArrowRight,
   Check,
 } from "lucide-react";
 
@@ -92,7 +91,7 @@ export default function LandingPage() {
                 onClick={() => router.push("/borrower/register")}
                 className="px-8 py-3 bg-gradient-to-r from-primary to-blue-600 rounded-lg font-semibold hover:shadow-lg hover:shadow-primary/50 transition-all flex items-center gap-2"
               >
-                Get Started <ArrowRight size={20} />
+                Get Started <span className="text-xl">→</span>
               </button>
               <button
                 onClick={() => router.push("/login")}
@@ -202,7 +201,7 @@ export default function LandingPage() {
             onClick={() => router.push("/borrower/register")}
             className="px-8 py-4 bg-gradient-to-r from-primary to-blue-600 rounded-lg font-semibold text-lg hover:shadow-lg hover:shadow-primary/50 transition-all inline-flex items-center gap-2"
           >
-            Create Your Account <ArrowRight size={20} />
+            Create Your Account <span className="text-xl">→</span>
           </button>
         </div>
       </section>
