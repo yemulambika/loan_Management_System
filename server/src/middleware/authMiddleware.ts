@@ -10,28 +10,28 @@ const authMiddleware = (
   res: Response,
   next: NextFunction
 ) => {
-  const token = req.headers.authorization;
+  const authHeader = req.headers.authorization;
 
-  if (!token) {
+  if (!authHeader) {
     return res.status(401).json({
       message: "Unauthorized",
     });
   }
 
+  const parts = authHeader.split(" ");
+  if (parts.length !== 2 || parts[0] !== "Bearer") {
+    return res.status(401).json({
+      message: "Invalid token format",
+    });
+  }
+
   try {
-    const parts = token?.split(" ");
-if (!parts || parts.length < 2) {
-  throw new Error("Invalid token format");
-}
-
-const decoded = jwt.verify(
-  token?.split(" ")[1] ?? "",
-  process.env.JWT_SECRET!
-);
-
+    const decoded = jwt.verify(parts[1], process.env.JWT_SECRET!) as {
+      id: string;
+      role: string;
+    };
 
     req.user = decoded;
-
     next();
   } catch (error) {
     return res.status(401).json({

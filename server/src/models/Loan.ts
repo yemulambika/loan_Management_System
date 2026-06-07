@@ -5,22 +5,38 @@ const loanSchema = new mongoose.Schema(
     borrower: {
       type: mongoose.Schema.Types.ObjectId,
       ref: "User",
+      required: true,
+      index: true,
     },
 
-    fullName: String,
+    fullName: {
+      type: String,
+      required: true,
+    },
     pan: String,
     dob: String,
     monthlySalary: Number,
     employmentMode: String,
 
-    amount: Number,
-    tenure: Number,
+    amount: {
+      type: Number,
+      required: true,
+      default: 0,
+    },
+    tenure: {
+      type: Number,
+      required: true,
+      default: 0,
+    },
     interestRate: Number,
     interest: Number,
     totalRepayment: Number,
 
     salarySlip: String,
-    documents: [String],
+    documents: {
+      type: [String],
+      default: [],
+    },
 
     status: {
       type: String,
@@ -44,5 +60,8 @@ const loanSchema = new mongoose.Schema(
     timestamps: true,
   }
 );
+
+loanSchema.index({ status: 1 });
+loanSchema.index({ borrower: 1 });
 
 export default mongoose.model("Loan", loanSchema);

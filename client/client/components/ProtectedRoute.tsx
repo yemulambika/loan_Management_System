@@ -1,7 +1,8 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
+import { useAuth } from "@/hooks/useAuth";
 
 export default function ProtectedRoute({
   children,
@@ -11,42 +12,33 @@ export default function ProtectedRoute({
   requiredRole?: string;
 }) {
   const router = useRouter();
-  const [loading, setLoading] = useState(true);
-  const [authorized, setAuthorized] = useState(false);
+  const { isAuthenticated, role, loading, logout } = useAuth();
+
+  const required = requiredRole?.toString().trim().toLowerCase();
+  const isAdmin = role === "admin";
+  const hasRequiredRole = required ? role === required : true;
+  const authorized = !loading && isAuthenticated && (hasRequiredRole || isAdmin);
 
   useEffect(() => {
-    const token = localStorage.getItem("token");
-    const role = localStorage.getItem("role")?.toString().trim().toLowerCase();
-
-    if (!token) {
-      router.push("/login");
+    if (loading) {
       return;
     }
 
-    const required = requiredRole?.toString().trim().toLowerCase();
-    const isAdmin = role === "admin";
-    const hasRequiredRole = required ? role === required : true;
-
-    if (!hasRequiredRole && !isAdmin) {
-      // User doesn't have required role and is not admin, redirect to login
-      localStorage.removeItem("token");
-      localStorage.removeItem("role");
+    if (!isAuthenticated || !authorized) {
+      logout();
       router.push("/login");
-      return;
     }
-
-    // eslint-disable-next-line react-hooks/set-state-in-effect
-    setAuthorized(true);
-    setLoading(false);
-  }, [requiredRole, router]);
+  }, [authorized, isAuthenticated, loading, logout, router]);
 
   if (loading) {
-    return <div className="flex items-center justify-center min-h-screen bg-gradient-to-b from-blue-50 to-slate-100">
-      <div className="text-center">
-        <div className="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-blue-500"></div>
-        <p className="mt-4 text-slate-600">Loading...</p>
+    return (
+      <div className="flex items-center justify-center min-h-screen bg-gradient-to-b from-blue-50 to-slate-100">
+        <div className="text-center">
+          <div className="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-blue-500"></div>
+          <p className="mt-4 text-slate-600">Loading...</p>
+        </div>
       </div>
-    </div>;
+    );
   }
 
   if (!authorized) {

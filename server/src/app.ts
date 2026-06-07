@@ -3,12 +3,17 @@ import cors from "cors";
 import path from "path";
 import { fileURLToPath } from "url";
 import fs from "fs";
+import helmet from "helmet";
+import cookieParser from "cookie-parser";
+import morgan from "morgan";
+import compression from "compression";
 
 import authRoutes from "./routes/authRoutes.js";
 import loanRoutes from "./routes/loanRoutes.js";
 import paymentRoutes from "./routes/paymentRoutes.js";
 import dashboardRoutes from "./routes/dashboardRoutes.js";
 
+import { authLimiter, apiLimiter } from "./middleware/rateLimiter.js";
 import errorMiddleware from "./middleware/errorMiddleware.js";
 
 // Get the directory name in ES modules
@@ -24,6 +29,15 @@ if (!fs.existsSync(uploadsDir)) {
 }
 
 const app = express();
+
+// Performance optimizations
+app.use(compression()); // Enable gzip compression
+app.disable("x-powered-by"); // Remove header
+
+// Security headers and request logging
+app.use(helmet());
+app.use(morgan(process.env.NODE_ENV === "production" ? "short" : "dev")); // Less verbose in production
+app.use(cookieParser());
 
 // CORS configuration - allows all Vercel URLs + localhost + custom origins from env
 const isOriginAllowed = (origin: string | undefined) => {
@@ -72,8 +86,8 @@ app.get("/", (req, res) => {
   res.send("Loan Management API Running");
 });
 
-
-app.use("/api/auth", authRoutes);
+app.use(apiLimiter);
+app.use("/api/auth", authLimiter, authRoutes);
 app.use("/api/loan", loanRoutes);
 app.use("/api/payment", paymentRoutes);
 app.use("/api/dashboard", dashboardRoutes);

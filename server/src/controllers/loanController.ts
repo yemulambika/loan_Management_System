@@ -97,10 +97,7 @@ export const getPendingLoans = async (
   req: AuthRequest,
   res: Response
 ) => {
-  const loans = await Loan.find({
-    status: "PENDING",
-  });
-
+  const loans = await Loan.find({ status: "PENDING" }).lean();
   res.json(loans);
 };
 
@@ -119,17 +116,16 @@ export const updateLoanStatus = async (
     {
       new: true,
     }
-  );
+  ).lean();
 
   res.json(loan);
-};export const getSanctionedLoans = async (
+};
+
+export const getSanctionedLoans = async (
   req: AuthRequest,
   res: Response
 ) => {
-  const loans = await Loan.find({
-    status: "SANCTIONED",
-  });
-
+  const loans = await Loan.find({ status: "SANCTIONED" }).lean();
   res.json(loans);
 };
 
@@ -137,10 +133,7 @@ export const getDisbursedLoans = async (
   req: AuthRequest,
   res: Response
 ) => {
-  const loans = await Loan.find({
-    status: "DISBURSED",
-  });
-
+  const loans = await Loan.find({ status: "DISBURSED" }).lean();
   res.json(loans);
 };
 
@@ -148,13 +141,12 @@ export const getMyLoan = async (
   req: AuthRequest,
   res: Response
 ) => {
-  const loan = await Loan.findOne({
-    borrower: req.user.id,
-  }).sort({ createdAt: -1 });
+  const loan = await Loan.findOne({ borrower: req.user.id })
+    .sort({ createdAt: -1 })
+    .lean();
 
   res.json(loan);
-};
-export const uploadDocuments = async (req: AuthRequest, res: Response) => {
+};export const uploadDocuments = async (req: AuthRequest, res: Response) => {
   try {
     if (!req.files) {
       return res.status(400).json({ message: "No files uploaded" });
@@ -231,7 +223,9 @@ export const getLeads = async (req: AuthRequest, res: Response) => {
 };
 export const getMyLoans = async (req: AuthRequest, res: Response) => {
   try {
-    const loans = await Loan.find({ borrower: req.user.id }).sort({ createdAt: -1 });
+    const loans = await Loan.find({ borrower: req.user.id })
+      .sort({ createdAt: -1 })
+      .lean();
     res.json(loans);
   } catch (error) {
     res.status(500).json({ message: "Failed to fetch loans", error });
@@ -240,8 +234,10 @@ export const getMyLoans = async (req: AuthRequest, res: Response) => {
 export const getFollowUps = async (req: AuthRequest, res: Response) => {
   try {
     const loans = await Loan.find({
-      status: { $in: ["PENDING", "REJECTED", "SANCTIONED"] }
-    }).populate("borrower", "fullName email stage lastActive");
+      status: { $in: ["PENDING", "REJECTED", "SANCTIONED"] },
+    })
+      .populate("borrower", "name email stage lastActive")
+      .lean();
 
     res.json(loans);
   } catch (error) {

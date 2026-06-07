@@ -1,12 +1,24 @@
 import express from "express";
 import User from "../models/User.js"; // import your User schema
-import { login, register } from "../controllers/authController.js";
+import {
+  login,
+  register,
+  refreshToken,
+  logout,
+} from "../controllers/authController.js";
+import { validateRequest } from "../middleware/validateRequest.js";
+import {
+  validateLoginPayload,
+  validateRegisterPayload,
+} from "../validation/authValidation.js";
 
 const router = express.Router();
 
 // Auth routes
-router.post("/register", register);
-router.post("/login", login);
+router.post("/register", validateRequest(validateRegisterPayload), register);
+router.post("/login", validateRequest(validateLoginPayload), login);
+router.post("/refresh-token", refreshToken);
+router.post("/logout", logout);
 
 // New Leads
 router.get("/users/leads", async (req, res) => {

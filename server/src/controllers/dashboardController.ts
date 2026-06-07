@@ -7,37 +7,29 @@ export const getDashboardStats = async (
   res: Response
 ) => {
   try {
-    const totalUsers = await User.countDocuments();
-
-    const totalLoans = await Loan.countDocuments();
-
-    const pendingLoans = await Loan.countDocuments({
-      status: "PENDING",
-    });
-
-    const sanctionedLoans =
-      await Loan.countDocuments({
-        status: "SANCTIONED",
-      });
-
-    const disbursedLoans =
-      await Loan.countDocuments({
-        status: "DISBURSED",
-      });
-
-    const closedLoans = await Loan.countDocuments({
-      status: "CLOSED",
-    });
-
-    const totalAmount = await Loan.aggregate([
-      {
-        $group: {
-          _id: null,
-          total: {
-            $sum: "$amount",
+    const [
+      totalUsers,
+      totalLoans,
+      pendingLoans,
+      sanctionedLoans,
+      disbursedLoans,
+      closedLoans,
+      totalAmountResult,
+    ] = await Promise.all([
+      User.countDocuments(),
+      Loan.countDocuments(),
+      Loan.countDocuments({ status: "PENDING" }),
+      Loan.countDocuments({ status: "SANCTIONED" }),
+      Loan.countDocuments({ status: "DISBURSED" }),
+      Loan.countDocuments({ status: "CLOSED" }),
+      Loan.aggregate([
+        {
+          $group: {
+            _id: null,
+            total: { $sum: "$amount" },
           },
         },
-      },
+      ]),
     ]);
 
     res.json({
@@ -47,8 +39,7 @@ export const getDashboardStats = async (
       sanctionedLoans,
       disbursedLoans,
       closedLoans,
-      totalLoanAmount:
-        totalAmount[0]?.total || 0,
+      totalLoanAmount: totalAmountResult[0]?.total || 0,
     });
   } catch (error) {
     res.status(500).json({

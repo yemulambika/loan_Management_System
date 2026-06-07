@@ -1,9 +1,9 @@
-import 'antd/dist/reset.css'; 
-import './globals.css';   
+import "./globals.css";
+import { AuthProvider } from "@/context/AuthContext";
 
 export const metadata = {
-  title: "Loan Management System",
-  description: "LMS",
+  title: "Loan Management System - Professional Loan Management Platform",
+  description: "Manage loans efficiently with our professional loan management system. Fast approvals, secure data, and real-time tracking.",
 };
 
 export default function RootLayout({
@@ -13,7 +13,13 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en">
-      <body>{children}</body>
+      <head>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+        <meta name="theme-color" content="#2563eb" />
+      </head>
+      <body>
+        <AuthProvider>{children}</AuthProvider>
+      </body>
     </html>
   );
 }
