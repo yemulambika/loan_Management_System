@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import { getSanctionedLoans, updateLoanStatus } from '@/services/loanService';
-import { DollarSign, CheckCircle } from 'lucide-react';
+import { DollarSign } from 'lucide-react';
 import { useState } from 'react';
 import { toast } from 'sonner';
 

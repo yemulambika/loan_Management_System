@@ -1,0 +1,32 @@
+{
+  "version": 2,
+  "builds": [
+    {
+      "src": "server/package.json",
+      "use": "@vercel/node",
+      "config": {
+        "includeFiles": ["server/**"]
+      }
+    },
+    {
+      "src": "client/client/package.json",
+      "use": "@vercel/static-build",
+      "config": {
+        "distDir": "dist",
+        "installCommand": "npm install",
+        "buildCommand": "npm run build",
+        "cwd": "client/client"
+      }
+    }
+  ],
+  "routes": [
+    {
+      "src": "/api/(.*)",
+      "dest": "/server/dist/server.js"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/client/client/dist/$1"
+    }
+  ]
+}

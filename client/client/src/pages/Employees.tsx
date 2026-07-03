@@ -1,5 +1,3 @@
-import { Users } from 'lucide-react';
-
 const Employees = () => {
   return (
     <div className="space-y-6">

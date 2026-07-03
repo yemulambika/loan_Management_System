@@ -18,6 +18,7 @@ import Settings from '@/pages/Settings';
 import AuditLogs from '@/pages/AuditLogs';
 import Support from '@/pages/Support';
 import NotFound from '@/pages/NotFound';
+import Home from '@/pages/Home';
 
 const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
   const { isAuthenticated, loading } = useAuth();
@@ -37,10 +38,11 @@ const ProtectedRoute = ({ children }: { children: React.ReactNode }) => {
 function AppRoutes() {
   return (
     <Routes>
+      <Route path="/" element={<Home />} />
       <Route path="/login" element={<Login />} />
       <Route path="/register" element={<Register />} />
       <Route
-        path="/"
+        path="/app"
         element={
           <ProtectedRoute>
             <Layout />

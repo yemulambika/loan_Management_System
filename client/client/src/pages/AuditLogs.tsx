@@ -1,5 +1,3 @@
-import { ScrollText } from 'lucide-react';
-
 const AuditLogs = () => {
   return (
     <div className="space-y-6">

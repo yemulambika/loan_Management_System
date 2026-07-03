@@ -1,5 +1,3 @@
-import { BarChart3 } from 'lucide-react';
-
 const Analytics = () => {
   return (
     <div className="space-y-6">

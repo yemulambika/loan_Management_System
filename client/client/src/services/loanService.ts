@@ -6,6 +6,16 @@ export const getLoans = async () => {
   return response.data;
 };
 
+export const getMyLoan = async () => {
+  const response = await API.get('/loan/my-loan');
+  return response.data;
+};
+
+export const getMyLoans = async () => {
+  const response = await API.get('/loan/my-loans');
+  return response.data;
+};
+
 export const getLoanById = async (id: string) => {
   const response = await API.get(`/loan/${id}`);
   return response.data;
@@ -33,6 +43,24 @@ export const getFollowUps = async () => {
 
 export const updateLoanStatus = async (id: string, status: string) => {
   const response = await API.put(`/loan/${id}/status`, { status });
+  return response.data;
+};
+
+export const personalDetails = async (data: {
+  fullName: string;
+  pan: string;
+  dob: string;
+  monthlySalary: number;
+  employmentMode: string;
+}) => {
+  const response = await API.post('/loan/personal-details', data);
+  return response.data;
+};
+
+export const uploadDocuments = async (formData: FormData) => {
+  const response = await API.post('/loan/upload-documents', formData, {
+    headers: { 'Content-Type': 'multipart/form-data' },
+  });
   return response.data;
 };
 

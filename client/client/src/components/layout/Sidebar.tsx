@@ -14,7 +14,6 @@ import {
   ScrollText,
   HelpCircle,
   Landmark,
-  Briefcase,
 } from 'lucide-react';
 import { useAuth } from '@/context/AuthContext';
 
@@ -26,21 +25,21 @@ interface MenuItem {
 }
 
 const allMenuItems: MenuItem[] = [
-  { path: '/', icon: LayoutDashboard, label: 'Dashboard', roles: ['admin', 'sales', 'sanction', 'disbursement', 'collection', 'borrower'] },
-  { path: '/customers', icon: Users, label: 'Customers', roles: ['admin', 'sales'] },
-  { path: '/loans', icon: FileText, label: 'My Loans', roles: ['borrower'] },
-  { path: '/loans', icon: FileText, label: 'Loan Applications', roles: ['admin', 'sales'] },
-  { path: '/loan-approval', icon: CheckCircle, label: 'Loan Approval', roles: ['admin', 'sanction'] },
-  { path: '/loan-disbursement', icon: DollarSign, label: 'Loan Disbursement', roles: ['admin', 'disbursement'] },
-  { path: '/emi', icon: CreditCard, label: 'EMI Management', roles: ['admin', 'collection'] },
-  { path: '/payments', icon: Receipt, label: 'Payments', roles: ['admin', 'collection'] },
-  { path: '/transactions', icon: BarChart3, label: 'Transactions', roles: ['admin', 'collection'] },
-  { path: '/reports', icon: PieChart, label: 'Reports', roles: ['admin', 'sales', 'sanction', 'disbursement', 'collection'] },
-  { path: '/analytics', icon: BarChart3, label: 'Analytics', roles: ['admin'] },
-  { path: '/employees', icon: UserCog, label: 'Employees', roles: ['admin'] },
-  { path: '/settings', icon: Settings, label: 'Settings', roles: ['admin', 'sales', 'sanction', 'disbursement', 'collection', 'borrower'] },
-  { path: '/audit-logs', icon: ScrollText, label: 'Audit Logs', roles: ['admin'] },
-  { path: '/support', icon: HelpCircle, label: 'Support', roles: ['admin', 'sales', 'sanction', 'disbursement', 'collection', 'borrower'] },
+  { path: '/app', icon: LayoutDashboard, label: 'Dashboard', roles: ['admin', 'sales', 'sanction', 'disbursement', 'collection', 'borrower'] },
+  { path: '/app/customers', icon: Users, label: 'Customers', roles: ['admin', 'sales'] },
+  { path: '/app/loans', icon: FileText, label: 'My Loans', roles: ['borrower'] },
+  { path: '/app/loans', icon: FileText, label: 'Loan Applications', roles: ['admin', 'sales'] },
+  { path: '/app/loan-approval', icon: CheckCircle, label: 'Loan Approval', roles: ['admin', 'sanction'] },
+  { path: '/app/loan-disbursement', icon: DollarSign, label: 'Loan Disbursement', roles: ['admin', 'disbursement'] },
+  { path: '/app/emi', icon: CreditCard, label: 'EMI Management', roles: ['admin', 'collection'] },
+  { path: '/app/payments', icon: Receipt, label: 'Payments', roles: ['admin', 'collection'] },
+  { path: '/app/transactions', icon: BarChart3, label: 'Transactions', roles: ['admin', 'collection'] },
+  { path: '/app/reports', icon: PieChart, label: 'Reports', roles: ['admin', 'sales', 'sanction', 'disbursement', 'collection'] },
+  { path: '/app/analytics', icon: BarChart3, label: 'Analytics', roles: ['admin'] },
+  { path: '/app/employees', icon: UserCog, label: 'Employees', roles: ['admin'] },
+  { path: '/app/settings', icon: Settings, label: 'Settings', roles: ['admin', 'sales', 'sanction', 'disbursement', 'collection', 'borrower'] },
+  { path: '/app/audit-logs', icon: ScrollText, label: 'Audit Logs', roles: ['admin'] },
+  { path: '/app/support', icon: HelpCircle, label: 'Support', roles: ['admin', 'sales', 'sanction', 'disbursement', 'collection', 'borrower'] },
 ];
 
 interface SidebarProps {

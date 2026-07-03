@@ -1,4 +1,4 @@
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, BarChart, Bar, Legend, PieChart, Pie, Cell } from 'recharts';
+import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, PieChart, Pie, Cell } from 'recharts';
 import { useQuery } from '@tanstack/react-query';
 import { getLoans } from '@/services/loanService';
 
@@ -11,7 +11,7 @@ const LoanChart = () => {
   });
 
   const monthlyData = loans?.reduce((acc: Record<string, any>, loan: any) => {
-    const month = new Date(loan.createdAt).toLocaleMonthString('short', { month: 'short' });
+    const month = new Date(loan.createdAt).toLocaleDateString('en-US', { month: 'short' });
     if (!acc[month]) acc[month] = { month, count: 0, amount: 0 };
     acc[month].count += 1;
     acc[month].amount += loan.amount || 0;
@@ -58,7 +58,7 @@ const LoanChart = () => {
               fill="#8884d8"
               dataKey="value"
             >
-              {pieData.map((entry: any, index: number) => (
+{pieData.map((_entry: any, index: number) => (
                 <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
               ))}
             </Pie>

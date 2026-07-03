@@ -1,7 +1,7 @@
 import { useState } from 'react';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
 import { getPendingLoans, updateLoanStatus } from '@/services/loanService';
-import { CheckCircle, XCircle, Eye, X } from 'lucide-react';
+import { CheckCircle, XCircle, X } from 'lucide-react';
 import { toast } from 'sonner';
 
 const statusColors = {

@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { useNavigate, Navigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 import { Landmark, Eye, EyeOff } from 'lucide-react';
 import { useAuth } from '@/context/AuthContext';
 
@@ -14,14 +14,14 @@ const Login = () => {
   useEffect(() => {
     if (isAuthenticated) {
       const redirectMap: Record<string, string> = {
-        admin: '/',
-        sales: '/customers',
-        sanction: '/loan-approval',
-        disbursement: '/loan-disbursement',
-        collection: '/emi',
-        borrower: '/loans',
+        admin: '/app',
+        sales: '/app/customers',
+        sanction: '/app/loan-approval',
+        disbursement: '/app/loan-disbursement',
+        collection: '/app/emi',
+        borrower: '/app/loans',
       };
-      navigate(redirectMap[role || 'borrower'] || '/');
+      navigate(redirectMap[role || 'borrower'] || '/app');
     }
   }, [isAuthenticated, role, navigate]);
 
@@ -97,6 +97,15 @@ const Login = () => {
             <p className="text-xs text-blue-700">admin@gmail.com, sales@gmail.com, sanction@gmail.com</p>
             <p className="text-xs text-blue-700">disbursement@gmail.com, collection@gmail.com, borrower@gmail.com</p>
             <p className="text-xs text-blue-700 font-semibold mt-1">Password: Password@123</p>
+          </div>
+
+          <div className="mt-4 text-center">
+            <p className="text-sm text-muted">
+              Don't have an account?{' '}
+              <Link to="/register" className="text-primary font-medium hover:underline">
+                Register
+              </Link>
+            </p>
           </div>
         </div>
       </div>

@@ -1,36 +1,26 @@
-"use client";
+import { useNavigate } from 'react-router-dom';
+import { ShieldCheck, Zap, Check } from 'lucide-react';
 
-import React from "react";
-import { useRouter } from "next/navigation";
-import {
-  ShieldCheck,
-  Zap,
-  Check,
-} from "lucide-react";
-
-export default function LandingPage() {
-  const router = useRouter();
+const Home = () => {
+  const navigate = useNavigate();
 
   const features = [
     {
       icon: <ShieldCheck className="w-12 h-12" />,
       title: "Easy Loan Application",
-      description:
-        "Apply for loans quickly with a simple and secure process.",
+      description: "Apply for loans quickly with a simple and secure process.",
       color: "from-blue-500 to-blue-600",
     },
     {
       icon: <ShieldCheck className="w-12 h-12" />,
       title: "Secure Data",
-      description:
-        "Your personal and financial information is protected with enterprise-grade security.",
+      description: "Your personal and financial information is protected with enterprise-grade security.",
       color: "from-green-500 to-green-600",
     },
     {
       icon: <Zap className="w-12 h-12" />,
       title: "Fast Approval",
-      description:
-        "Get loan approvals in record time with our automated review process.",
+      description: "Get loan approvals in record time with our automated review process.",
       color: "from-orange-500 to-orange-600",
     },
   ];
@@ -45,7 +35,7 @@ export default function LandingPage() {
   ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-slate-900 via-slate-800 to-slate-900 text-white">
+    <div className="min-h-screen bg-gradient-to-b from-slate-950 via-slate-900 to-slate-950 text-white">
       {/* Navigation */}
       <nav className="fixed top-0 w-full bg-slate-900/80 backdrop-blur-md z-50 border-b border-white/10">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-4 flex justify-between items-center">
@@ -57,14 +47,14 @@ export default function LandingPage() {
           </div>
           <div className="flex gap-3">
             <button
-              onClick={() => router.push("/login")}
+              onClick={() => navigate("/login")}
               className="px-6 py-2 rounded-lg text-white hover:bg-white/10 transition-all"
             >
               Login
             </button>
             <button
-              onClick={() => router.push("/borrower/register")}
-              className="px-6 py-2 bg-primary hover:bg-primary-dark rounded-lg font-semibold transition-all"
+              onClick={() => navigate("/register")}
+              className="px-6 py-2 bg-primary hover:bg-primary/90 rounded-lg font-semibold transition-all"
             >
               Register
             </button>
@@ -75,7 +65,7 @@ export default function LandingPage() {
       {/* Hero Section */}
       <section className="pt-32 pb-20 px-4 sm:px-6 lg:px-8 max-w-7xl mx-auto">
         <div className="grid md:grid-cols-2 gap-12 items-center">
-          <div className="animate-slide-up">
+          <div>
             <h1 className="text-5xl md:text-6xl font-bold mb-6 leading-tight">
               Loan Management
               <span className="block bg-gradient-to-r from-blue-400 to-cyan-400 bg-clip-text text-transparent">
@@ -88,13 +78,13 @@ export default function LandingPage() {
             </p>
             <div className="flex gap-4 flex-wrap">
               <button
-                onClick={() => router.push("/borrower/register")}
+                onClick={() => navigate("/register")}
                 className="px-8 py-3 bg-gradient-to-r from-primary to-blue-600 rounded-lg font-semibold hover:shadow-lg hover:shadow-primary/50 transition-all flex items-center gap-2"
               >
                 Get Started <span className="text-xl">→</span>
               </button>
               <button
-                onClick={() => router.push("/login")}
+                onClick={() => navigate("/login")}
                 className="px-8 py-3 border-2 border-white/30 rounded-lg font-semibold hover:bg-white/10 transition-all"
               >
                 Sign In
@@ -198,7 +188,7 @@ export default function LandingPage() {
             Join thousands of users managing their loans efficiently
           </p>
           <button
-            onClick={() => router.push("/borrower/register")}
+            onClick={() => navigate("/register")}
             className="px-8 py-4 bg-gradient-to-r from-primary to-blue-600 rounded-lg font-semibold text-lg hover:shadow-lg hover:shadow-primary/50 transition-all inline-flex items-center gap-2"
           >
             Create Your Account <span className="text-xl">→</span>
@@ -262,5 +252,6 @@ export default function LandingPage() {
       </footer>
     </div>
   );
-}
+};
 
+export default Home;

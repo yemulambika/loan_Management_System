@@ -1,5 +1,4 @@
-;
-import { Users, Mail, Phone, MapPin, Briefcase, CreditCard, FileText, Calendar } from 'lucide-react';
+import { Users } from 'lucide-react';
 import { useQuery } from '@tanstack/react-query';
 import { getLoans } from '@/services/loanService';
 

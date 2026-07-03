@@ -1,6 +1,6 @@
 # Loan Management System
 
-Full-stack Loan Management System built with Next.js, TypeScript, Express, MongoDB, JWT auth, and role-based dashboards.
+Full-stack Loan Management System built with Vite + React, Express, MongoDB, JWT auth, and role-based dashboards.
 
 ## Features
 
@@ -12,6 +12,26 @@ Full-stack Loan Management System built with Next.js, TypeScript, Express, Mongo
 - Role-based access control on frontend and backend
 - Payment recording with unique UTR validation
 - Auto-close loan when repayment is complete
+
+## Project Structure
+
+```
+Loan_Management/
+├── package.json           # Root package.json (simple, no workspaces)
+├── vercel.json            # Vercel deployment configuration
+├── server/                # Express backend
+│   ├── src/
+│   │   ├── server.ts      # Server entry point
+│   │   └── ...            # Controllers, models, routes, middleware
+│   └── package.json
+└── client/
+    └── client/            # Vite + React frontend
+        ├── src/
+        │   ├── App.tsx      # Main app with react-router-dom
+        │   ├── main.tsx     # Entry point
+        │   └── pages/       # Page components
+        └── package.json
+```
 
 ## Setup
 
@@ -36,6 +56,15 @@ npm run dev
 ```
 
 Open `http://localhost:3000`.
+
+## Vercel Deployment
+
+1. Ensure `server/.env` has your MongoDB URI and JWT secret
+2. Set the following environment variables in Vercel dashboard:
+   - `MONGO_URI`
+   - `JWT_SECRET`
+   - `ALLOWED_ORIGINS` (your deployed frontend URL)
+3. Deploy - Vercel will automatically detect `vercel.json` configuration
 
 ## Seeded Login Credentials
 
@@ -76,4 +105,3 @@ npm run build
 ```bash
 cd server
 npx tsc --noEmit
-```

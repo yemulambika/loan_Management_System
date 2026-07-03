@@ -1,8 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import { Users, FileText, Clock, XCircle, DollarSign, CreditCard, AlertTriangle, TrendingUp } from 'lucide-react';
-import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, PieChart, Pie, Cell, BarChart, Bar, Legend } from 'recharts';
 import { getDashboardStats } from '@/services/dashboardService';
-import { getLoans } from '@/services/loanService';
 import StatCard from '@/components/dashboard/StatCard';
 import LoanChart from '@/components/dashboard/LoanChart';
 import RecentActivity from '@/components/dashboard/RecentActivity';
@@ -11,11 +9,6 @@ const Dashboard = () => {
   const { data: stats, isLoading: statsLoading } = useQuery({
     queryKey: ['dashboardStats'],
     queryFn: getDashboardStats,
-  });
-
-  const { data: loans } = useQuery({
-    queryKey: ['loans'],
-    queryFn: getLoans,
   });
 
   const statCards = [
