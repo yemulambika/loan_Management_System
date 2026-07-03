@@ -61,7 +61,4 @@ const loanSchema = new mongoose.Schema(
   }
 );
 
-loanSchema.index({ status: 1 });
-loanSchema.index({ borrower: 1 });
-
 export default mongoose.model("Loan", loanSchema);

@@ -32,9 +32,6 @@ const paymentSchema = new mongoose.Schema(
   }
 );
 
-paymentSchema.index({ utrNumber: 1 }, { unique: true });
-paymentSchema.index({ loanId: 1 });
-
 export default mongoose.model(
   "Payment",
   paymentSchema

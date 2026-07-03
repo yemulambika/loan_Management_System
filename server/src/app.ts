@@ -1,5 +1,4 @@
 import express from "express";
-import cors from "cors";
 import path from "path";
 import { fileURLToPath } from "url";
 import fs from "fs";
@@ -39,9 +38,9 @@ app.use(helmet());
 app.use(morgan(process.env.NODE_ENV === "production" ? "short" : "dev")); // Less verbose in production
 app.use(cookieParser());
 
-// CORS configuration - allows all Vercel URLs + localhost + custom origins from env
-const isOriginAllowed = (origin: string | undefined) => {
-  if (!origin) return true; // Allow requests with no origin (like mobile apps)
+// Custom CORS configuration with proper credentials support
+const isOriginAllowed = (origin: string | undefined): boolean => {
+  if (!origin) return true; // Allow requests with no origin (like mobile apps, same-origin)
 
   // Allow localhost
   if (origin.startsWith("http://localhost:")) return true;
@@ -61,18 +60,28 @@ const isOriginAllowed = (origin: string | undefined) => {
   return false;
 };
 
-app.use(
-  cors({
-    origin: (origin, callback) => {
-      if (isOriginAllowed(origin)) {
-        callback(null, true);
-      } else {
-        callback(new Error("Not allowed by CORS"));
-      }
-    },
-    credentials: true,
-  })
-);
+// Custom CORS middleware to properly support credentials
+app.use((req, res, next) => {
+  const origin = req.headers.origin as string | undefined;
+  
+  if (isOriginAllowed(origin)) {
+    // Use the actual origin if present, otherwise use a default
+    const allowedOrigin = origin || "http://localhost:3000";
+    
+    res.header("Access-Control-Allow-Origin", allowedOrigin);
+    res.header("Access-Control-Allow-Methods", "GET, POST, PUT, DELETE, OPTIONS, PATCH");
+    res.header("Access-Control-Allow-Headers", "Content-Type, Authorization, X-Requested-With");
+    res.header("Access-Control-Allow-Credentials", "true");
+    res.header("Vary", "Origin");
+  }
+
+  // Handle preflight requests
+  if (req.method === "OPTIONS") {
+    return res.sendStatus(200);
+  }
+
+  next();
+});
 
 
 app.use(express.json());
