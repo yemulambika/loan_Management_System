@@ -1,6 +1,7 @@
 import axios from 'axios';
 
-const API_BASE_URL = import.meta.env.VITE_API_URL || 'http://localhost:5000';
+// Use Render backend for production, localhost for development
+const API_BASE_URL = import.meta.env.VITE_API_URL || 'https://loan-management-system-zy9g.onrender.com';
 
 export const API = axios.create({
   baseURL: `${API_BASE_URL}/api`,
